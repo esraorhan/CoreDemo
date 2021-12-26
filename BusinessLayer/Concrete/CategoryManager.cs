@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using System;
@@ -14,35 +15,37 @@ namespace BusinessLayer.Concrete
         //Business katmanında abctract klosörü içinde yer alan interfaceler : Service olarak adlandırılıyor...
         //Business katmanında yer alan Concrete klasörü içinde yer alaan sınıflar : Manager olarak adlandırılıyor...
         //Business katmanı içerisinde yapılmak istenen : Validasyon = Geçerlilik kuralları 
-        EfCategoryRepository efCategoryRepository;
-
-        public CategoryManager() //constructer metot yazmış olduk...
+        //EfCategoryRepository efCategoryRepository;
+        ICategoryDal _categoryDal;
+   
+        public CategoryManager(ICategoryDal categoryDal)
         {
-            efCategoryRepository = new EfCategoryRepository();
+            _categoryDal = categoryDal;
         }
+
         public void CategoryAdd(Category category)
         {
-            efCategoryRepository.Insert(category);
+            _categoryDal.Insert(category);
         }
 
         public void CategoryDelete(Category category)
         {
-            efCategoryRepository.Delete(category);
+            _categoryDal.Delete(category);
         }
 
         public void CategoryUpdate(Category category)
         {
-            efCategoryRepository.Update(category);
+            _categoryDal.Update(category);
         }
 
         public Category GetById(int id)
         {
-            return efCategoryRepository.GetByID(id);
+            return _categoryDal.GetByID(id);
         }
 
         public List<Category> GetList()
         {
-            return efCategoryRepository.GetListAll();
+            return _categoryDal.GetListAll();
         }
     }
 }

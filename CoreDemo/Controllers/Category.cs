@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,11 @@ namespace CoreDemo.Controllers
 {
     public class Category : Controller
     {
-        public IActionResult Index()
+        CategoryManager cm = new CategoryManager(new EfCategoryRepository()); //büütün mtotlara erişim sağlamış olduk ..
+        public IActionResult Index() //
         {
-            return View();
+            var values = cm.GetList();
+            return View(values);
         }
     }
 }
