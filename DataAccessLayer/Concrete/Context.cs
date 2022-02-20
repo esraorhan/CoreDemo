@@ -12,7 +12,7 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) //connecting string tanımlanacak yer...
         {
-            optionsBuilder.UseSqlServer("server=ESRAORHAN;database=CoreBlogDb; integrated security= true;");
+            optionsBuilder.UseSqlServer("server=DESKTOP-8AK4CAP;database=CoreBlogDb; integrated security= true;");
         }
 
         public DbSet<About> Abouts { get; set; }
