@@ -1,4 +1,6 @@
-﻿using EntityLayer.Concrete;
+﻿using BusinessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,8 @@ namespace CoreDemo.Controllers
 {
     public class NewsLetterController : Controller
     {
+        NewsLetterManager nm = new NewsLetterManager(new EfNewsLetterRepository());
+
         [HttpGet]
         public PartialViewResult SubscribeMail()
         {
@@ -17,6 +21,8 @@ namespace CoreDemo.Controllers
         [HttpPost]
         public PartialViewResult SubscribeMail(NewsLetter p)
         {
+            p.MailStatus = true;
+            nm.AddNewsLetter(p);
             return PartialView();
         }
     }

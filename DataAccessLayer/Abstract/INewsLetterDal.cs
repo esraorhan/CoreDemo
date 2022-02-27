@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-    interface INewsLetterDal: IGenericDal<NewsLetter> // İnclude işlem için kullandık.
+    public interface INewsLetterDal: IGenericDal<NewsLetter> // İnclude işlem için kullandık.
     {
     
     }
