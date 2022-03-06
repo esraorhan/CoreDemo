@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoreDemo.Controllers
 {
-    [Authorize]
+    //[Authorize]  => config de proje bazlı authorize işlemi yapmış olduk. startup. cs de tamamn
     public class WriterController : Controller
     {
         public IActionResult Index()
