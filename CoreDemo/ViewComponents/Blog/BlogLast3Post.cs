@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace CoreDemo.ViewComponents.Blog
 {
-    public class WriterLastBlog :ViewComponent
+    public class BlogLast3Post : ViewComponent
     {
         BlogManager bm = new BlogManager(new EfBlogRepository());
 
         public IViewComponentResult Invoke()
         {
-            var values = bm.GetBlogListByWriter(1);
+            var values = bm.GetLast3Blog();
             return View(values);
         }
-
     }
 }

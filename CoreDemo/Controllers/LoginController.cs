@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CoreDemo.Controllers
 {
-    //[AllowAnonymous] // 
+    [AllowAnonymous] // 
     public class LoginController : Controller
     {
         public IActionResult Index()
