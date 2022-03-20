@@ -24,5 +24,13 @@ namespace DataAccessLayer.EntityFramework
             }
            
         }
+
+        public List<Blog> GetListWithCategoryByWriter(int id)
+        {
+            using (var c = new Context())
+            {               //Blog/BlogListByWriter sayfasında tabloda categorinin ismini direkt çekebilmek için yaptık. id sine göre 
+                return c.Blogs.Include(x => x.Category).Where(x=>x.WriterID==id).ToList();
+            }
+        }
     }
 }
