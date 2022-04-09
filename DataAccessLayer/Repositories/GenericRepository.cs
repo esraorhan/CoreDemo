@@ -46,7 +46,9 @@ namespace DataAccessLayer.Repositories
 
         public void Update(T t)
         {
-            throw new NotImplementedException();
+            using var c = new Context();
+            c.Update(t);
+            c.SaveChanges();
         }
     }
 }

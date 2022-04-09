@@ -44,9 +44,9 @@
                                     <span class="badge badge-danger">Pasif</span>
                                 </td>
                             }
-
-                            <td><a href="#" class="btn btn-danger btn-sm">Sil</a></td>
-                            <td><a href="#" class="btn btn-warning btn-sm">Düzenle</a></td>
+                          @* buraya sweatalert ile emin misiniz işlemi yapılacak ödev ? *@
+                            <td><a href="/Blog/DeleteBlog/@item.BlogID" class="btn btn-danger btn-sm">Sil</a></td>
+                            <td><a href="/Blog/EditBlog/@item.BlogID" class="btn btn-warning btn-sm">Düzenle</a></td>
                         </tr>
                     }
                 </tbody>
@@ -58,4 +58,4 @@
     </div>
 </div>
 
-<a href="#" class="btn btn-primary">Yeni Blog Oluştur</a>
+<a href="/Blog/BlogAdd/" class="btn btn-primary">Yeni Blog Oluştur</a>
