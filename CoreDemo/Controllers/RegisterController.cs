@@ -33,7 +33,7 @@ namespace CoreDemo.Controllers
                 //ÖDEV -şEHİR VE İLÇELERİ GETİR DROPDAOWN vİEWMODEL İLE ....
                 p.WriterStatus = true;
                 p.WriterAbout = "Deneme Test";
-                wm.WriterAdd(p);
+                wm.TAdd(p);
                 return RedirectToAction("Index", "Blog");
             }
             else
