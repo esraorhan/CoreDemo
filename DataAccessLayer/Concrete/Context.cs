@@ -12,8 +12,8 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) //connecting string tanımlanacak yer...
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-8AK4CAP;database=CoreBlogDb; integrated security= true;");
-            //optionsBuilder.UseSqlServer("server=ESRAORHAN;database=CoreBlogDb; integrated security= true;");
+          //  optionsBuilder.UseSqlServer("server=DESKTOP-8AK4CAP;database=CoreBlogDb; integrated security= true;");
+            optionsBuilder.UseSqlServer("server=ESRAORHAN;database=CoreBlogDb; integrated security= true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
