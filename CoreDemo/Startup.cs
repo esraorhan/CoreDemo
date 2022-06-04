@@ -38,7 +38,8 @@ namespace CoreDemo
             });
 
             services.AddMvc();
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x=> {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
+            {
                 x.LoginPath = "/Login/Index"; //login path verdik ve cokie ekledik sanýrým 
             });
         }
@@ -57,7 +58,7 @@ namespace CoreDemo
                 app.UseHsts();
             }
 
-            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1","?code={0}");//durum kodlarýný kullan anlamýna gelmektedir.
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1", "?code={0}");//durum kodlarýný kullan anlamýna gelmektedir.
             //soru iþareti null dönme durumu içindir. code ismi controller tarafýndaki paramaetre ile ayný olmasý gerekiyor. 
 
             app.UseHttpsRedirection();
@@ -73,8 +74,12 @@ namespace CoreDemo
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                       name: "areas",
+                       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                     name: "default",
+                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
