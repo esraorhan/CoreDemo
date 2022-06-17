@@ -14,6 +14,11 @@
 <script src="~/inspinia-gh-pages/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+
+    var str = "adff54b";
+    var sonuc = (/a...b/).test(str);
+    console.log(sonuc);
+
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(DrawonLoad);
 
