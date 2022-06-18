@@ -6,6 +6,7 @@ using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,14 @@ namespace CoreDemo.Controllers
     public class WriterController : Controller
     {
         WriterManager vm = new WriterManager(new EfWriterRepository());
+
+        private readonly UserManager<AppUser> _userManager;
+        UserManager userManagers = new UserManager(new EfUserRepository());
+        public WriterController(UserManager<AppUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
         [Authorize]
         public IActionResult Index()
         {
@@ -60,12 +69,18 @@ namespace CoreDemo.Controllers
         [HttpGet]
         public ActionResult WriterEditProfile()
         {
-            Context c = new Context();
-            var usermail = User.Identity.Name;
+            Context c = new Context();  //identity göre revize ediyoruz. 
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+          
+            //var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
+            //var writervalues = vm.TGetById(writerID);
+            //return View(writervalues);
+            // var username = await _userManager.FindByIdAsync(User.Identity.Name);
+            var id = c.Users.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
+            var values = userManagers.TGetById(id);
+            return View(values);
 
-            var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
-            var writervalues = vm.TGetById(writerID);
-            return View(writervalues);
         }
        // [AllowAnonymous]
         [HttpPost]
@@ -86,7 +101,7 @@ namespace CoreDemo.Controllers
                     //return RedirectToAction("WriterEditProfile", "Writer");
                 }
                
-            }
+            } 
             else
             {
                 foreach (var item in results.Errors)
