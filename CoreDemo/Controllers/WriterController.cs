@@ -23,7 +23,7 @@ namespace CoreDemo.Controllers
         WriterManager vm = new WriterManager(new EfWriterRepository());
 
         private readonly UserManager<AppUser> _userManager;
-        UserManager userManagers = new UserManager(new EfUserRepository());
+        UserManager userManager = new UserManager(new EfUserRepository());
         public WriterController(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
@@ -67,48 +67,51 @@ namespace CoreDemo.Controllers
 
        // [AllowAnonymous]
         [HttpGet]
-        public ActionResult WriterEditProfile()
+        public async Task<IActionResult> WriterEditProfile()
         {
-            Context c = new Context();  //identity göre revize ediyoruz. 
-            var username = User.Identity.Name;
-            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
-          
-            //var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
-            //var writervalues = vm.TGetById(writerID);
-            //return View(writervalues);
-            // var username = await _userManager.FindByIdAsync(User.Identity.Name);
-            var id = c.Users.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
-            var values = userManagers.TGetById(id);
+            //Context c = new Context();  //identity göre revize ediyoruz. 
+            //var username = User.Identity.Name;
+            //var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();           
+            //var id = c.Users.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
+            //var values = userManagers.TGetById(id);
+
+            var values = await _userManager.FindByNameAsync(User.Identity.Name); //sisteme giriş yapan kullanıcı adı olacak.
             return View(values);
 
         }
        // [AllowAnonymous]
         [HttpPost]
-        public ActionResult WriterEditProfile(Writer p,string AgainPassword)
+        public async Task<IActionResult> WriterEditProfile(UserUpdateViewModel model)
         {
-            WriterValidator wl = new WriterValidator();
-            ValidationResult results = wl.Validate(p);
-            if (results.IsValid)
-            {
-                if (p.WriterPassword == AgainPassword)
-                {
-                    vm.TUpdate(p);
-                    return RedirectToAction("Index", "Dashboard");
-                }
-                else
-                {
-                    ViewBag.Hata = "Şifreler Uyumsuz kontrol ediniz.";
-                    //return RedirectToAction("WriterEditProfile", "Writer");
-                }
-               
-            } 
-            else
-            {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
+            //WriterValidator wl = new WriterValidator();
+            //ValidationResult results = wl.Validate(p);
+            //if (results.IsValid)
+            //{
+            //    if (p.WriterPassword == AgainPassword)
+            //    {
+            //        vm.TUpdate(p);
+            //        return RedirectToAction("Index", "Dashboard");
+            //    }
+            //    else
+            //    {
+            //        ViewBag.Hata = "Şifreler Uyumsuz kontrol ediniz.";
+            //        //return RedirectToAction("WriterEditProfile", "Writer");
+            //    }
+
+            //} 
+            //else
+            //{
+            //    foreach (var item in results.Errors)
+            //    {
+            //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+            //    }
+            //}
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            
+            model.mail = values.Email;
+            model.namesurname = values.NameSurname;
+            model.imageurl = values.ImageUrl;
+
             return View();
         }
 
