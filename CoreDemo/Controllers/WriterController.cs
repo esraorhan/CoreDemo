@@ -65,7 +65,7 @@ namespace CoreDemo.Controllers
             return PartialView();
         }
 
-       // [AllowAnonymous]
+        // [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> WriterEditProfile()
         {
@@ -76,10 +76,16 @@ namespace CoreDemo.Controllers
             //var values = userManagers.TGetById(id);
 
             var values = await _userManager.FindByNameAsync(User.Identity.Name); //sisteme giriş yapan kullanıcı adı olacak.
-            return View(values);
+            UserUpdateViewModel model = new UserUpdateViewModel();
+            model.mail = values.Email;
+            model.namesurname = values.NameSurname;
+            model.imageurl = values.ImageUrl;
+            model.username = values.UserName;
+           
+            return View(model);
 
         }
-       // [AllowAnonymous]
+        // [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> WriterEditProfile(UserUpdateViewModel model)
         {
@@ -107,12 +113,13 @@ namespace CoreDemo.Controllers
             //    }
             //}
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            
-            model.mail = values.Email;
-            model.namesurname = values.NameSurname;
-            model.imageurl = values.ImageUrl;
 
-            return View();
+            values.Email = model.mail;
+            values.NameSurname = model.namesurname;
+            values.ImageUrl = model.imageurl;
+            values.PasswordHash = _userManager.PasswordHasher.HashPassword(values, model.password);
+            var result = await _userManager.UpdateAsync(values);
+            return RedirectToAction("Index", "Dashboard");
         }
 
         [AllowAnonymous]
@@ -129,7 +136,7 @@ namespace CoreDemo.Controllers
             if (p.WriterImage != null)
             {
                 var extension = Path.GetExtension(p.WriterImage.FileName);
-                var newimagename = Guid.NewGuid()+extension;
+                var newimagename = Guid.NewGuid() + extension;
                 var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newimagename);
                 var stream = new FileStream(location, FileMode.Create);
                 p.WriterImage.CopyTo(stream);
@@ -143,5 +150,7 @@ namespace CoreDemo.Controllers
             vm.TAdd(w);
             return RedirectToAction("Index", "Dashboard");
         }
+
+       
     }
 }

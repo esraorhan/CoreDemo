@@ -41,38 +41,19 @@ namespace CoreDemo.Controllers
                 }
                 else
                 {
-                    return View();
+                    return RedirectToAction("Index", "Login");
                 }
             }
-            return View();
+            else
+            {
+                return View();
+            }
+           
         }
-        //[HttpPost]
-        
-        //public async Task<IActionResult> Index(Writer p)
-        //{
-        //    Context c = new Context();
-        //    var datavalue = c.Writers.FirstOrDefault(x => x.WriterMail == p.WriterMail && x.WriterPassword == p.WriterPassword);
-        //    if (datavalue != null)
-        //    {
-        //        var claims = new List<Claim>
-        //        {
-        //             new Claim(ClaimTypes.Name,p.WriterMail)
-        //        };
-        //        var useridentity = new ClaimsIdentity(claims,"a"); //kullanııcı kimliğini aldı. anın nedeni araştır...
-
-        //        ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
-
-        //        await HttpContext.SignInAsync(principal);
-        //        return RedirectToAction("Index", "Dashboard");
-        //    }
-        //    else
-        //    {
-        //        return View();
-        //    }
-
-
-        //    //talepler ile  çalışacağız ...
-
-        //}
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Login");
+        }
     }
 }
