@@ -1,0 +1,98 @@
+﻿@using EntityLayer.Concrete
+@model List<Messaage2>
+@{
+    ViewData["Title"] = "InBox";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="ibox ">
+            <div class="ibox-content mailbox-content">
+                <div class="file-manager">
+                    <a class="btn btn-block btn-primary compose-mail" href="mail_compose.html">Mesaj Kutusu</a>
+                    <div class="space-25"></div>
+                    <h5>Folders</h5>
+                    <ul class="folder-list m-b-md" style="padding: 0">
+                        <li><a href="mailbox.html"> <i class="fa fa-inbox "></i> Gelen Mesajlar <span class="label label-warning float-right">@ViewBag.InBoxCount</span> </a></li>
+                        <li><a href="/Admin/AdminMessage/InBox/"> <i class="fa fa-envelope-o"></i> Giden  Mesajlar</a></li>
+                        <li><a href="/Admin/AdminMessage/SendBox/"> <i class="fa fa-certificate"></i> Önemli Mesajlar </a></li>
+                        <li><a href="mailbox.html"> <i class="fa fa-file-text-o"></i> Taslaklar <span class="label label-danger float-right">2</span></a></li>
+                        <li><a href="mailbox.html"> <i class="fa fa-trash-o"></i> Çöp Kutusu</a></li>
+                    </ul>
+                    <h5>Kategoriler</h5>
+                    <ul class="category-list" style="padding: 0">
+                        <li><a href="#"> <i class="fa fa-circle text-navy"></i> İş </a></li>
+                        <li><a href="#"> <i class="fa fa-circle text-danger"></i> Dökümanlar</a></li>
+                        <li><a href="#"> <i class="fa fa-circle text-primary"></i> Sosyal</a></li>
+                        <li><a href="#"> <i class="fa fa-circle text-info"></i> Tanıtımlar</a></li>
+                        <li><a href="#"> <i class="fa fa-circle text-warning"></i> Yıldızlı Mesajlar</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 animated fadeInRight">
+        <div class="mail-box-header">
+
+            <form method="get" action="index.html" class="float-right mail-search">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-sm" name="search" placeholder="Mail Ara">
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            Ara...
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <h2>
+                Gelen Kutusu (@ViewBag.InBoxCount)
+            </h2>
+            <div class="mail-tools tooltip-demo m-t-md">
+                <div class="btn-group float-right">
+                    <button class="btn btn-white btn-sm"><i class="fa fa-arrow-left"></i></button>
+                    <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i></button>
+
+                </div>
+                <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="Yenile" data-original-title="Tenile"><i class="fa fa-refresh"></i> Yenile</button>
+                <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Okundu olarak işaretle" data-original-title="Mark as read"><i class="fa fa-eye"></i> </button>
+                <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Önemli olarak işaretle"><i class="fa fa-exclamation"></i> </button>
+                <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Çöp Kutusuna taşı"><i class="fa fa-trash-o"></i> </button>
+
+            </div>
+        </div>
+        <div class="mail-box">
+
+            <table class="table table-hover table-mail">
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="unread">
+                            <td class="check-mail">
+                                <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                            </td>
+                            <td class="mail-ontact"><a href="mail_detail.html">@item.SenderUser.WriterName</a></td>
+                            <td class="mail-subject"><a href="mail_detail.html">@item.Subject</a></td>
+                            <td class=""><i class="fa fa-paperclip"></i></td>
+                            <td class="text-right mail-date">@item.MessageDate</td>
+                        </tr>
+                        @*<tr class="read">
+                            <td class="check-mail">
+                                <div class="icheckbox_square-green" style="position: relative;"><input type="checkbox" class="i-checks" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                            </td>
+                            <td class="mail-ontact"><a href="mail_detail.html">Facebook</a> <span class="label label-warning float-right">Clients</span> </td>
+                            <td class="mail-subject"><a href="mail_detail.html">Many desktop publishing packages and web page editors.</a></td>
+                            <td class=""></td>
+                            <td class="text-right mail-date">Jan 16</td>
+                        </tr>*@
+                    }
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>

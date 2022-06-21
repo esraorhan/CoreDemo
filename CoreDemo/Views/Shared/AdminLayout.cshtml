@@ -11,11 +11,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Empty Page</title>
+    <title>Admin Area</title>
 
     <link href="~/inspinia-gh-pages/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/inspinia-gh-pages/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="~/inspinia-gh-pages/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="~/inspinia-gh-pages/css/plugins/summernote/summernote-bs4.css" rel="stylesheet">
     <link href="~/inspinia-gh-pages/css/animate.css" rel="stylesheet">
     <link href="~/inspinia-gh-pages/css/style.css" rel="stylesheet">
 
@@ -148,24 +149,7 @@
 
                 </nav>
             </div>
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-sm-4">
-                    <h2>This is main title</h2>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="index.html">This is</a>
-                        </li>
-                        <li class="breadcrumb-item active">
-                            <strong>Breadcrumb</strong>
-                        </li>
-                    </ol>
-                </div>
-                <div class="col-sm-8">
-                    <div class="title-action">
-                        <a href="" class="btn btn-primary">This is action area</a>
-                    </div>
-                </div>
-            </div>
+
 
 
 
@@ -201,7 +185,8 @@
 
     <!-- iCheck -->
     <script src="~/inspinia-gh-pages/js/plugins/iCheck/icheck.min.js"></script>
-
+    <!-- SUMMERNOTE -->
+    <script src="~/inspinia-gh-pages/js/plugins/summernote/summernote-bs4.js"></script>
     <!-- Peity -->
     <script src="~/inspinia-gh-pages/js/demo/peity-demo.js"></script>
 
@@ -215,160 +200,6 @@
     <script src="~/inspinia-gh-pages/js/plugins/flot/jquery.flot.js"></script>
     <script src="~/inspinia-gh-pages/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
     <script src="~/inspinia-gh-pages/js/plugins/flot/jquery.flot.resize.js"></script>
-    <script>
-        $(document).ready(function () {
-            var d1 = [[1262304000000, 6], [1264982400000, 3057], [1267401600000, 20434], [1270080000000, 31982], [1272672000000, 26602], [1275350400000, 27826], [1277942400000, 24302], [1280620800000, 24237], [1283299200000, 21004], [1285891200000, 12144], [1288569600000, 10577], [1291161600000, 10295]];
-            var d2 = [[1262304000000, 5], [1264982400000, 200], [1267401600000, 1605], [1270080000000, 6129], [1272672000000, 11643], [1275350400000, 19055], [1277942400000, 30062], [1280620800000, 39197], [1283299200000, 37000], [1285891200000, 27000], [1288569600000, 21000], [1291161600000, 17000]];
-
-            var data1 = [
-                { label: "Data 1", data: d1, color: '#17a084' },
-                { label: "Data 2", data: d2, color: '#127e68' }
-            ];
-            $.plot($("#flot-chart1"), data1, {
-                xaxis: {
-                    tickDecimals: 0
-                },
-                series: {
-                    lines: {
-                        show: true,
-                        fill: true,
-                        fillColor: {
-                            colors: [{
-                                opacity: 1
-                            }, {
-                                opacity: 1
-                            }]
-                        }
-                    },
-                    points: {
-                        width: 0.1,
-                        show: false
-                    }
-                },
-                grid: {
-                    show: false,
-                    borderWidth: 0
-                },
-                legend: {
-                    show: false
-                }
-            });
-
-            var data2 = [
-                { label: "Data 1", data: d1, color: '#19a0a1' }
-            ];
-            $.plot($("#flot-chart2"), data2, {
-                xaxis: {
-                    tickDecimals: 0
-                },
-                series: {
-                    lines: {
-                        show: true,
-                        fill: true,
-                        fillColor: {
-                            colors: [{
-                                opacity: 1
-                            }, {
-                                opacity: 1
-                            }]
-                        }
-                    },
-                    points: {
-                        width: 0.1,
-                        show: false
-                    }
-                },
-                grid: {
-                    show: false,
-                    borderWidth: 0
-                },
-                legend: {
-                    show: false
-                }
-            });
-
-            var data3 = [
-                { label: "Data 1", data: d1, color: '#fbbe7b' },
-                { label: "Data 2", data: d2, color: '#f8ac59' }
-            ];
-            $.plot($("#flot-chart3"), data3, {
-                xaxis: {
-                    tickDecimals: 0
-                },
-                series: {
-                    lines: {
-                        show: true,
-                        fill: true,
-                        fillColor: {
-                            colors: [{
-                                opacity: 1
-                            }, {
-                                opacity: 1
-                            }]
-                        }
-                    },
-                    points: {
-                        width: 0.1,
-                        show: false
-                    }
-                },
-                grid: {
-                    show: false,
-                    borderWidth: 0
-                },
-                legend: {
-                    show: false
-                }
-            });
-
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green'
-            });
-
-            $(".todo-list").sortable({
-                placeholder: "sort-highlight",
-                handle: ".handle",
-                forcePlaceholderSize: true,
-                zIndex: 999999
-            }).disableSelection();
-
-            var mapData = {
-                "US": 498,
-                "SA": 200,
-                "CA": 1300,
-                "DE": 220,
-                "FR": 540,
-                "CN": 120,
-                "AU": 760,
-                "BR": 550,
-                "IN": 200,
-                "GB": 120,
-                "RU": 2000
-            };
-
-            $('#world-map').vectorMap({
-                map: 'world_mill_en',
-                backgroundColor: "transparent",
-                regionStyle: {
-                    initial: {
-                        fill: '#e4e4e4',
-                        "fill-opacity": 1,
-                        stroke: 'none',
-                        "stroke-width": 0,
-                        "stroke-opacity": 0
-                    }
-                },
-                series: {
-                    regions: [{
-                        values: mapData,
-                        scale: ["#1ab394", "#22d6b1"],
-                        normalizeFunction: 'polynomial'
-                    }]
-                }
-            });
-        });
-    </script>
 
 
 
