@@ -1,11 +1,11 @@
 ﻿@using EntityLayer.Concrete
 @model List<Messaage2>
 @{
-    ViewData["Title"] = "InBox";
+    ViewData["Title"] = "SendBox";
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
 
-<h1>Gelen Kutusu</h1>
+<h1>Giden Kutusu</h1>
 
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
@@ -15,9 +15,9 @@
                     <tr>
                         <td>#</td>
                         <td>Konu</td>
-                        <td>Gönderen</td>
+                        <td>Alıcı</td>
                         <td>Tarih</td>
-                        <td>Mesajı Aç</td>                      
+                        <td>Mesajı Aç</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,12 +26,12 @@
                         <tr>
                             <td>@item.MessageID</td>
                             <td>@item.Subject</td>
-                            <td>@item.SenderUser.WriterName</td>
+                            <td>@item.ReceiverUser.WriterName</td>
                             <td> @(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
-                          
-                           
+
+
                             <td><a href="/Message/MessageDetails/@item.MessageID" class="btn btn-danger btn-sm">Mesajı Aç</a></td>
-                           
+
                         </tr>
                     }
                 </tbody>
@@ -44,4 +44,3 @@
 </div>
 
 <a href="/Message/SendMessage/" class="btn btn-primary">Yeni Mesaj Oluştur</a>
-
