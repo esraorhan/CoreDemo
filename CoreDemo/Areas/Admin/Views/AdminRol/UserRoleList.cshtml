@@ -1,16 +1,18 @@
 ﻿@using EntityLayer.Concrete
-@model List<AppRole>
+@model List<AppUser>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "UserRoleList";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+
+<h1>Kullanıcının Rol Listesi</h1>
 
 <div class="row">
 
     <div class="col-lg-12">
         <div class="ibox ">
             <div class="ibox-title">
-                <h5>Roller </h5>
+                <h5>Kullanıcı Rol atama Listesi </h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -36,21 +38,19 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Başlık</th>                           
-                            <th>Sil</th>
-                            <th>Düzenle</th>
+                            <th>Kullanıcı</th>
+                            <th>Rol Ara</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <th>@item.Id</th>
-                                <th>@item.Name</th>                              
-                                <td><a href="/Admin/AdminRol/DeleteRole/@item.Id" class="btn btn-outline-danger">Sil</a></td>
-                                <td><a href="/Admin/AdminRol/UpdateRole/@item.Id" class="btn btn-outline-success">Düzenle</a></td>
-                                <td></td>
+                                <th>@item.UserName</th>
+                               
+                                <td><a href="/Admin/AdminRol/AssignRole/@item.Id" class="btn btn-outline-success">Rol Ata</a></td>
+                               
                             </tr>
 
                         }
@@ -58,13 +58,7 @@
                     </tbody>
                 </table>
 
-                <a href="/Admin/AdminRol/AddRole" class="btn btn-primary">Yeni Role Ekle</a>
-                <a href="/Admin/AdminRol/UserRoleList" class="btn btn-primary">Yeni Role Listesi</a>
+                <a href="/Admin/AdminRol/Index" class="btn btn-primary">Role Listesine Dön </a>
             </div>
         </div>
     </div>
-    @* 123 kırmızı
-        456 sarı
-        7-8 mavi
-        9-10 yeşil renk *@
-
