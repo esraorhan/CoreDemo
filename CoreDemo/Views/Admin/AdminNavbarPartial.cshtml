@@ -28,16 +28,19 @@
             <li>
                 <a href="/Admin/Chart/Index"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Grafikler</span>  </a>
             </li>
+            @if (User.IsInRole(role: "Admin"))
+            {
+                <li>
+                    <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Mesajlar </span><span class="label label-warning float-right">0/0</span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="/Admin/AdminMessage/InBox/">Gelen Kutusu</a></li>
+                        <li><a href="/Admin/AdminMessage/SendBox/">Giden Kutusu</a></li>
+                        <li><a href="/Admin/AdminMessage/ComposeMessage/">Yeni Mesaj Oluştur</a></li>
 
-            <li>
-                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Mesajlar </span><span class="label label-warning float-right">0/0</span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="/Admin/AdminMessage/InBox/">Gelen Kutusu</a></li>
-                    <li><a href="/Admin/AdminMessage/SendBox/">Giden Kutusu</a></li>
-                    <li><a href="/Admin/AdminMessage/ComposeMessage/">Yeni Mesaj Oluştur</a></li>
+                    </ul>
+                </li>
+            }
 
-                </ul>
-            </li>
             <li>
                 <a href="metrics.html"><i class="fa fa-group"></i> <span class="nav-label">Metrikler</span>  </a>
             </li>

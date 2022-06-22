@@ -58,7 +58,7 @@ namespace CoreDemo
                 //Cookie settings
                 opts.Cookie.HttpOnly = true;
                 opts.ExpireTimeSpan = TimeSpan.FromMinutes(100);
-                //opts.AccessDeniedPath = new PathString("/Login/AccessDenied/");
+                opts.AccessDeniedPath = new PathString("/Login/AccessDenied/");  //yetkisi olmayan sayfalarda gideceði path 
                 opts.LoginPath = "/Login/Index/";
                 opts.SlidingExpiration = true;
             });
