@@ -62,7 +62,7 @@ namespace jwt_core_proje_kampi
             }
 
             app.UseRouting();
-
+            app.UseAuthentication(); // [Authorize] sayfa 1 de eriþim saðlanmasý  bunu eklememiz gerekti.
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
